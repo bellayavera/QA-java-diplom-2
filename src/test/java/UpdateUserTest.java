@@ -23,7 +23,7 @@ public class UpdateUserTest extends Api{
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
         File jsonForUpdateEmail = new File("src/test/resources/UpdateEmailUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForCreateAndLogin);
 
         accessToken = responseLogin.jsonPath().getString("accessToken");
@@ -41,7 +41,7 @@ public class UpdateUserTest extends Api{
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
         File jsonForUpdateName = new File("src/test/resources/UpdateNameUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForCreateAndLogin);
 
         accessToken = responseLogin.jsonPath().getString("accessToken");

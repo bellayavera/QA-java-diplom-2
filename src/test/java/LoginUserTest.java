@@ -22,7 +22,7 @@ public class LoginUserTest extends Api{
     public void loginUserIsSuccess() {
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForCreateAndLogin);
 
         responseLogin.then().assertThat().body("success",  equalTo(true))
@@ -37,7 +37,7 @@ public class LoginUserTest extends Api{
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
         File jsonForLoginWithIncorrectPass = new File("src/test/resources/LoginUserWithIncorrectPass.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForLoginWithIncorrectPass);
 
         responseLogin.then().assertThat().body("message",  equalTo("email or password are incorrect"))
@@ -52,7 +52,7 @@ public class LoginUserTest extends Api{
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
         File jsonForLoginWithIncorrectEmail = new File("src/test/resources/LoginUserWithIncorrectEmail.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForLoginWithIncorrectEmail);
 
         responseLogin.then().assertThat().body("message",  equalTo("email or password are incorrect"))

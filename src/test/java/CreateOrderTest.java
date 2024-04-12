@@ -25,7 +25,7 @@ public class CreateOrderTest extends Api{
     public void createOrderIsSuccessWhenLogin(){
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForCreateAndLogin);
         Response responseGetIngredients = getIngredients();
         List<String> ingredients = responseGetIngredients.jsonPath().getList("data._id");
@@ -49,7 +49,7 @@ public class CreateOrderTest extends Api{
     public void createOrderIsErrorWhenAreNotLogin(){
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseGetIngredients = getIngredients();
         List<String> ingredients = responseGetIngredients.jsonPath().getList("data._id");
         String json = "{\"ingredients\": \"" + ingredients.get(1) + "\"}";
@@ -71,7 +71,7 @@ public class CreateOrderTest extends Api{
     public void createOrderIsErrorWhenOrderEmpty(){
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForCreateAndLogin);
         accessToken = responseLogin.jsonPath().getString("accessToken");
 
@@ -88,7 +88,7 @@ public class CreateOrderTest extends Api{
     public void createOrderIsErrorWhenIncorrectIngredients(){
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForCreateAndLogin);
         accessToken = responseLogin.jsonPath().getString("accessToken");
 

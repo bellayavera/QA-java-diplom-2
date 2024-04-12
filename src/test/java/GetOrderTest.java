@@ -25,7 +25,7 @@ public class GetOrderTest extends Api{
     public void getOrderIsSuccessWhenLogin(){
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForCreateAndLogin);
         Response responseGetIngredients = getIngredients();
         List<String> ingredients = responseGetIngredients.jsonPath().getList("data._id");
@@ -34,7 +34,7 @@ public class GetOrderTest extends Api{
         accessToken = responseLogin.jsonPath().getString("accessToken");
 
         Response responseCreateFirstOrder = createOrder(jsonFirstOrder, accessToken);
-        Response responseCreateSecondOrder = createOrder(jsonFirstOrder, accessToken);
+        Response responseCreateSecondOrder = createOrder(jsonSecondOrder, accessToken);
 
         var firstOrderNumber = responseCreateFirstOrder.jsonPath().getInt("order.number");
         var secondOrderNumber = responseCreateSecondOrder.jsonPath().getInt("order.number");
@@ -49,7 +49,7 @@ public class GetOrderTest extends Api{
                 .statusCode(200);
 
         List<Integer> ordersActual = responseGetOrder.jsonPath().getList("orders.number");
-        Assert.assertTrue(ordersExpected.equals(ordersActual));
+        Assert.assertEquals(ordersExpected, ordersActual);
     }
 
 
@@ -57,7 +57,7 @@ public class GetOrderTest extends Api{
     public void getOrderIsErrorWhenAreNotLogin(){
         File jsonForCreateAndLogin = new File("src/test/resources/CreateLoginUser.json");
 
-        Response responseCreate = createUser(jsonForCreateAndLogin);
+        createUser(jsonForCreateAndLogin);
         Response responseLogin = loginUser(jsonForCreateAndLogin);
         accessToken = responseLogin.jsonPath().getString("accessToken");
 
@@ -66,7 +66,7 @@ public class GetOrderTest extends Api{
         String jsonOrder = "{\"ingredients\": \"" + ingredients.get(1) + "\"}";
         String accessTokenEmpty = "";
 
-        Response responseCreateOrder = createOrder(jsonOrder, accessToken);
+        createOrder(jsonOrder, accessToken);
 
         Response responseGetOrder = getOrder(accessTokenEmpty);
 
